@@ -4,6 +4,8 @@
 
 	let { title, close, children } = $props();
 
+	let search = $state('');
+
 	// Prevent body scroll when modal is open
 	$effect(() => {
 		document.body.style.overflow = 'hidden';
@@ -70,13 +72,23 @@
 				<span class="text-[13px] font-medium text-zinc-400">{title}</span>
 			</div>
 
-			<!-- Spacer to balance traffic lights -->
-			<div class="w-14"></div>
+			<!-- Search -->
+			<div class="relative w-44">
+				<svg class="absolute left-2 top-1/2 -translate-y-1/2 w-3 h-3 text-zinc-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+					<path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+				</svg>
+				<input
+					type="text"
+					placeholder="Search"
+					bind:value={search}
+					class="w-full h-6 pl-7 pr-2 text-[12px] bg-zinc-700/50 border border-zinc-600/50 rounded-md text-zinc-200 placeholder:text-zinc-500 outline-none focus:border-zinc-500 focus:bg-zinc-700/80 transition-colors"
+				/>
+			</div>
 		</div>
 
 		<!-- Content Area -->
 		<div class="flex-1 overflow-y-auto overflow-x-hidden window-scroll">
-			{@render children()}
+			{@render children(search)}
 		</div>
 	</div>
 </div>

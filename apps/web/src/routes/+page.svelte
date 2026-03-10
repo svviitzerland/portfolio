@@ -3,16 +3,15 @@
 	import DesktopIcon from '$lib/components/desktop/DesktopIcon.svelte';
 	import DesktopWindow from '$lib/components/desktop/DesktopWindow.svelte';
 	import Dock from '$lib/components/desktop/Dock.svelte';
-	import AboutMeContent from '$lib/components/desktop/AboutMeContent.svelte';
 	import ProjectsContent from '$lib/components/desktop/ProjectsContent.svelte';
 	import BlogContent from '$lib/components/desktop/BlogContent.svelte';
-	import ContactContent from '$lib/components/desktop/ContactContent.svelte';
 	import ResumeModal from '$lib/components/ResumeModal.svelte';
 
 	let { data } = $props();
 
-	/** @type {null | 'about' | 'projects' | 'blog' | 'resume' | 'contact'} */
+	/** @type {null | 'projects' | 'blog' | 'dossier'} */
 	let activeWindow = $state(null);
+	let brightness = $state(100);
 
 	const posts = $derived(data?.posts || []);
 
@@ -44,14 +43,14 @@
 	></div>
 
 	<!-- Menu Bar -->
-	<MenuBar />
+	<MenuBar bind:brightness />
 
 	<!-- Desktop Icons — LEFT column, macOS style -->
 	<div class="absolute top-12 left-5 flex flex-col gap-1 z-10 pt-2">
-		<!-- About Me -->
-		<DesktopIcon label="About Me" onclick={() => openWindow('about')}>
-			<svg class="w-7 h-7 text-blue-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-				<path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+		<!-- Dossier (Resume) -->
+		<DesktopIcon label="Dossier" onclick={() => openWindow('dossier')}>
+			<svg class="w-7 h-7 text-red-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+				<path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
 			</svg>
 		</DesktopIcon>
 
@@ -68,51 +67,37 @@
 				<path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
 			</svg>
 		</DesktopIcon>
-
-		<!-- Resume.pdf -->
-		<DesktopIcon label="Resume.pdf" onclick={() => openWindow('resume')}>
-			<svg class="w-7 h-7 text-red-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-				<path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
-			</svg>
-		</DesktopIcon>
-
-		<!-- Contact -->
-		<DesktopIcon label="Contact" onclick={() => openWindow('contact')}>
-			<svg class="w-7 h-7 text-violet-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-				<path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
-			</svg>
-		</DesktopIcon>
 	</div>
 
 	<!-- Dock -->
 	<Dock />
+
+	<!-- Brightness overlay -->
+	{#if brightness < 100}
+		<div
+			class="absolute inset-0 bg-black pointer-events-none z-[45]"
+			style="opacity: {(100 - brightness) / 100}"
+		></div>
+	{/if}
 </div>
 
 <!-- Window Modals -->
-{#if activeWindow === 'about'}
-	<DesktopWindow title="About Me" close={closeWindow}>
-		<AboutMeContent />
-	</DesktopWindow>
-{/if}
-
 {#if activeWindow === 'projects'}
 	<DesktopWindow title="Projects" close={closeWindow}>
-		<ProjectsContent />
+		{#snippet children(search)}
+			<ProjectsContent {search} />
+		{/snippet}
 	</DesktopWindow>
 {/if}
 
 {#if activeWindow === 'blog'}
 	<DesktopWindow title="Blog" close={closeWindow}>
-		<BlogContent {posts} />
+		{#snippet children(search)}
+			<BlogContent {posts} {search} />
+		{/snippet}
 	</DesktopWindow>
 {/if}
 
-{#if activeWindow === 'contact'}
-	<DesktopWindow title="Contact" close={closeWindow}>
-		<ContactContent />
-	</DesktopWindow>
-{/if}
-
-{#if activeWindow === 'resume'}
+{#if activeWindow === 'dossier'}
 	<ResumeModal close={closeWindow} />
 {/if}

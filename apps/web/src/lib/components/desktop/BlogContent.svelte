@@ -1,7 +1,7 @@
 <script>
 	import { resolve } from '$app/paths';
 
-	let { posts = [] } = $props();
+	let { posts = [], search = '' } = $props();
 
 	function formatDate(date) {
 		return new Date(date).toLocaleDateString('en-US', {
@@ -10,16 +10,24 @@
 			day: 'numeric'
 		});
 	}
+
+	const filtered = $derived(
+		search
+			? posts.filter((p) => {
+					const q = search.toLowerCase();
+					return (
+						p.meta.title.toLowerCase().includes(q) ||
+						(p.meta.description && p.meta.description.toLowerCase().includes(q)) ||
+						(p.meta.tags && p.meta.tags.some((t) => t.toLowerCase().includes(q)))
+					);
+				})
+			: posts
+	);
 </script>
 
 <div class="p-8 md:p-12 text-zinc-100">
-	<h1 class="text-3xl font-black text-white tracking-tight mb-2">Blog</h1>
-	<p class="text-zinc-400 mb-10 font-light">
-		Insights, tutorials, and thoughts on building scalable systems.
-	</p>
-
 	<div class="space-y-2">
-		{#each posts as post (post.slug)}
+		{#each filtered as post (post.slug)}
 			<a
 				href={resolve(`/blog/${post.slug}`)}
 				class="group flex flex-col md:flex-row md:items-center gap-2 md:gap-6 p-5 rounded-xl hover:bg-zinc-800/50 transition-all duration-200 border border-transparent hover:border-zinc-700/50"
@@ -64,7 +72,11 @@
 			</a>
 		{/each}
 
-		{#if posts.length === 0}
+		{#if filtered.length === 0 && search}
+			<div class="text-center py-20 text-zinc-500">
+				<p class="text-sm">No results for "{search}"</p>
+			</div>
+		{:else if filtered.length === 0}
 			<div class="text-center py-20 text-zinc-500">
 				<p class="text-lg">No posts yet.</p>
 			</div>

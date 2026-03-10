@@ -3,11 +3,6 @@
 
 	const { socials } = cv;
 
-	let dockEl = $state(null);
-	let mouseX = $state(-1);
-	let isHovering = $state(false);
-
-	// SVG icon paths for each social network
 	const iconMap = {
 		GitHub: {
 			viewBox: '0 0 24 24',
@@ -31,48 +26,17 @@
 		}
 	};
 
-	function handleMouseMove(e) {
-		if (!dockEl) return;
-		const rect = dockEl.getBoundingClientRect();
-		mouseX = e.clientX - rect.left;
-		isHovering = true;
-	}
-
-	function handleMouseLeave() {
-		isHovering = false;
-		mouseX = -1;
-	}
-
-	function getScale(index) {
-		if (!isHovering || mouseX < 0) return 1;
-		// Each icon is ~48px wide with ~12px gap = 60px per item
-		const iconCenter = index * 60 + 30;
-		const distance = Math.abs(mouseX - iconCenter);
-		const maxDistance = 120;
-
-		if (distance > maxDistance) return 1;
-
-		// Cosine-based smooth scaling
-		const scale = 1 + 0.8 * Math.cos((distance / maxDistance) * (Math.PI / 2));
-		return Math.min(scale, 1.8);
-	}
-
 	let tooltipIndex = $state(-1);
 </script>
 
 <!-- Dock -->
 <div class="fixed bottom-3 left-1/2 -translate-x-1/2 z-40">
-	<!-- svelte-ignore a11y_no_static_element_interactions -->
 	<nav
-		bind:this={dockEl}
-		onmousemove={handleMouseMove}
-		onmouseleave={handleMouseLeave}
-		class="flex items-end gap-3 px-4 py-2 bg-zinc-800/50 backdrop-blur-2xl border border-white/20 rounded-2xl"
+		class="flex items-center gap-2 px-3 py-2 bg-zinc-800/50 backdrop-blur-2xl border border-white/20 rounded-2xl"
 		aria-label="Social links dock"
 	>
 		{#each socials as social, i (social.network)}
-			{@const scale = getScale(i)}
-			<div class="relative flex flex-col items-center">
+			<div class="relative">
 				<!-- Tooltip -->
 				{#if tooltipIndex === i}
 					<div
@@ -89,8 +53,7 @@
 					href={social.url}
 					target="_blank"
 					rel="noopener noreferrer"
-					class="flex items-center justify-center w-12 h-12 rounded-xl bg-zinc-700/80 text-zinc-300 hover:text-white transition-colors duration-150"
-					style="transform: scale({scale}); transform-origin: bottom; transition: transform 0.15s cubic-bezier(0.22, 1, 0.36, 1);"
+					class="flex items-center justify-center w-12 h-12 rounded-xl bg-zinc-700/60 text-zinc-300 hover:text-white hover:bg-zinc-600/60 hover:scale-110 transition-all duration-200"
 					onmouseenter={() => (tooltipIndex = i)}
 					onmouseleave={() => (tooltipIndex = -1)}
 					aria-label={social.network}
