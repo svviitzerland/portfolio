@@ -83,7 +83,7 @@
 	</div>
 
 	<!-- Dock -->
-	<Dock />
+	<Dock onopen={openWindow} />
 
 	<!-- Brightness overlay -->
 	{#if brightness < 100}

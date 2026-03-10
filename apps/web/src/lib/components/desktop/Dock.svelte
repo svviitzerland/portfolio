@@ -1,6 +1,8 @@
 <script>
 	import cv from '$lib/data/cv.json';
 
+	let { onopen } = $props();
+
 	const { socials } = cv;
 
 	const iconMap = {
@@ -49,27 +51,38 @@
 					</div>
 				{/if}
 
-				<a
-					href={social.url}
-					target="_blank"
-					rel="noopener noreferrer"
-					class="flex items-center justify-center w-12 h-12 rounded-xl bg-zinc-700/60 text-zinc-300 hover:text-white hover:bg-zinc-600/60 hover:scale-110 transition-all duration-200"
-					onmouseenter={() => (tooltipIndex = i)}
-					onmouseleave={() => (tooltipIndex = -1)}
-					aria-label={social.network}
-				>
-					{#if iconMap[social.network]}
-						<svg
-							class="w-6 h-6"
-							viewBox={iconMap[social.network].viewBox}
-							fill="currentColor"
-						>
-							<path d={iconMap[social.network].path} />
+				{#if social.network === 'Blog'}
+					<button
+						type="button"
+						class="flex items-center justify-center w-12 h-12 rounded-xl bg-zinc-700/60 text-zinc-300 hover:text-white hover:bg-zinc-600/60 hover:scale-110 transition-all duration-200 cursor-pointer"
+						onmouseenter={() => (tooltipIndex = i)}
+						onmouseleave={() => (tooltipIndex = -1)}
+						onclick={() => onopen('blog')}
+						aria-label="Open Blog"
+					>
+						<svg class="w-6 h-6" viewBox={iconMap['Blog'].viewBox} fill="currentColor">
+							<path d={iconMap['Blog'].path} />
 						</svg>
-					{:else}
-						<span class="text-lg font-bold">{social.network[0]}</span>
-					{/if}
-				</a>
+					</button>
+				{:else}
+					<a
+						href={social.url}
+						target="_blank"
+						rel="noopener noreferrer"
+						class="flex items-center justify-center w-12 h-12 rounded-xl bg-zinc-700/60 text-zinc-300 hover:text-white hover:bg-zinc-600/60 hover:scale-110 transition-all duration-200"
+						onmouseenter={() => (tooltipIndex = i)}
+						onmouseleave={() => (tooltipIndex = -1)}
+						aria-label={social.network}
+					>
+						{#if iconMap[social.network]}
+							<svg class="w-6 h-6" viewBox={iconMap[social.network].viewBox} fill="currentColor">
+								<path d={iconMap[social.network].path} />
+							</svg>
+						{:else}
+							<span class="text-lg font-bold">{social.network[0]}</span>
+						{/if}
+					</a>
+				{/if}
 			</div>
 		{/each}
 	</nav>
