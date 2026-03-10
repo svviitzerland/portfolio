@@ -1,0 +1,39 @@
+# ── OS ──────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+
+# ── IDE ─────────────────────────────────────────────────────────────
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# ── Web (SvelteKit / Node) ─────────────────────────────────────────
+node_modules
+/apps/web/build
+/apps/web/.svelte-kit
+/apps/web/package
+.env
+.env.*
+!.env.example
+vite.config.js.timestamp-*
+vite.config.ts.timestamp-*
+/apps/web/.wrangler
+/apps/web/.dev.vars
+
+# Keep the generated resume PDF
+!/apps/web/static/resume.pdf
+
+# ── SSH (Go) ────────────────────────────────────────────────────────
+/apps/ssh/ssh-portfolio
+*.exe
+/apps/ssh/.ssh/
+
+# ── Terraform ───────────────────────────────────────────────────────
+*.tfstate
+*.tfstate.*
+.terraform/
+.terraform.lock.hcl
+
+# ── Claude ──────────────────────────────────────────────────────────
+.claude/

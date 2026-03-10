@@ -1,0 +1,4 @@
+# This file is now served dynamically from /robots.txt endpoint
+# Static fallback only
+User-agent: *
+Allow: /

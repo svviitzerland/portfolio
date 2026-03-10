@@ -1,0 +1,345 @@
+{
+	"basics": {
+		"name": "Farhan Aulianda",
+		"label": "Full Stack & Cloud Engineer | Security & AI/ML Enthusiast",
+		"email": "farhanauliandaa@gmail.com",
+		"phone": "(+62) 822-8040-7563",
+		"website": "farhanaulianda.my.id",
+		"summary": "I build products from zero to one, focusing on shipping AI-powered tools for real users. I love the messy work of turning ideas into working software, debugging across the stack, and learning whatever I need to get things done. I thrive in small teams where everyone ships fast and owns their work.",
+		"location": {
+			"address": "",
+			"postalCode": "",
+			"city": "",
+			"countryCode": "ID",
+			"region": ""
+		}
+	},
+	"education": [
+		{
+			"institution": "BINUS Online Learning",
+			"area": "Computer Science",
+			"studyType": "Bachelor",
+			"startDate": "Jul 2023",
+			"endDate": "Present"
+		},
+		{
+			"institution": "SMKN 5 Telkom",
+			"area": "Software Engineering (Rekayasa Perangkat Lunak)",
+			"studyType": "High School",
+			"startDate": "Jun 2020",
+			"endDate": "Mar 2023"
+		}
+	],
+	"skills": [
+		"JavaScript/TypeScript",
+		"Python",
+		"Svelte/SvelteKit",
+		"Next.js",
+		"React",
+		"FastAPI",
+		"Node.js",
+		"HTML/CSS",
+		"GraphQL",
+		"MongoDB",
+		"PostgreSQL",
+		"Supabase",
+		"Redis",
+		"ClickHouse",
+		"Kafka",
+		"Docker",
+		"AWS",
+		"GCP",
+		"Cloudflare",
+		"DigitalOcean",
+		"Terraform",
+		"CI/CD",
+		"Git/GitHub",
+		"Linux",
+		"LiteLLM",
+		"LangChain",
+		"Strands Agents",
+		"AI/ML Integration"
+	],
+	"talks": [
+		{
+			"title": "Serverless Meets Quantum: Solving Complex Problems with Amazon Braket and Lambda",
+			"event": "AWS Summit Jakarta",
+			"date": "2025",
+			"summary": "Presented on combining serverless architecture with quantum computing using AWS Braket and Lambda for solving complex computational problems."
+		}
+	],
+	"work": [
+		{
+			"company": "PT. CLOUD ZEN GLOBAL",
+			"position": "Founder & Full Stack Engineer",
+			"startDate": "Apr 2024",
+			"endDate": "Present",
+			"highlights": [
+				"Started my own company to turn ideas into real products. As a solo founder, I handle everything from designing interfaces, writing both frontend and backend code, setting up cloud infrastructure, and shipping features to production.",
+				"Built and launched three SaaS products from scratch, each solving different problems: app deployment, no-code AI tools, and security testing.",
+				"Learned to move fast, make trade-offs, and solve whatever problem is in front of me. The full stack is my playground."
+			]
+		},
+		{
+			"company": "PT. SysTech Global Informasi (SGI Asia)",
+			"position": "Security Engineer / Penetration Tester",
+			"startDate": "Jul 2023",
+			"endDate": "Aug 2023",
+			"highlights": [
+				"Executed penetration testing for international enterprise clients, identifying critical vulnerabilities.",
+				"Collaborated with red teams on comprehensive security assessments and threat modeling.",
+				"Developed automated security testing scripts and applied secure coding practices."
+			]
+		},
+		{
+			"company": "Syiah Kuala University",
+			"position": "Cloud Engineer",
+			"startDate": "Aug 2022",
+			"endDate": "Oct 2022",
+			"highlights": [
+				"Architected and deployed cloud solutions using AWS Lambda, API Gateway, ECS, and DynamoDB.",
+				"Implemented serverless applications and containerized deployments with ECS/ECR.",
+				"Configured security infrastructure using WAF, Shield, and IAM policies."
+			]
+		},
+		{
+			"company": "Goummat",
+			"position": "Full Stack Web Developer",
+			"startDate": "Apr 2020",
+			"endDate": "Jun 2022",
+			"highlights": [
+				"Built and maintained a recitation platform serving 4,500+ active users.",
+				"Developed RESTful APIs and frontend features using PHP/CodeIgniter and MySQL.",
+				"Collaborated with mobile developers to ensure seamless API integration."
+			]
+		},
+		{
+			"company": "TOC",
+			"position": "Web Developer",
+			"startDate": "2020",
+			"endDate": "2020",
+			"highlights": [
+				"Developed online motorcycle taxi platform backend and frontend using PHP/CodeIgniter.",
+				"Designed MySQL database schema and collaborated with Android developer for mobile integration."
+			]
+		},
+		{
+			"company": "YESJEK",
+			"position": "Web Developer",
+			"startDate": "2020",
+			"endDate": "2020",
+			"highlights": [
+				"Built web platform for online transportation service using PHP/CodeIgniter and MySQL.",
+				"Conducted testing and debugging to ensure platform stability and performance."
+			]
+		}
+	],
+	"experiences_in_organization": [
+		{
+			"organization": "GCC Cyber Security",
+			"position": "Committee for Indonesian Delegation",
+			"startDate": "2025",
+			"endDate": "Present",
+			"summary": "Coordinating and preparing the Indonesian delegation for upcoming GCC Cyber Security competitions (2026 onwards)."
+		},
+		{
+			"organization": "MiniMax",
+			"position": "Dev Ambassador",
+			"startDate": "2025",
+			"endDate": "Present",
+			"summary": "Selected as an early adopter to test and evaluate the capabilities of MiniMax's latest AI models."
+		},
+		{
+			"organization": "Google Student Ambassador",
+			"position": "Student Ambassador",
+			"startDate": "2025",
+			"endDate": "Present",
+			"summary": "Serving as the official campus representative to connect students with Google's developer ecosystem and resources."
+		},
+		{
+			"organization": "AWS Community Builder",
+			"position": "Community Builder",
+			"startDate": "2025",
+			"endDate": "Present",
+			"summary": "Selected as a Serverless domain expert in an exclusive global program, recognized for technical contributions and community impact in Indonesia."
+		},
+		{
+			"organization": "AWS User Group Jakarta",
+			"position": "Volunteer",
+			"startDate": "2024",
+			"endDate": "Present",
+			"summary": "Helping run meetups and connecting local cloud enthusiasts."
+		},
+		{
+			"organization": "Student Executive Organization",
+			"position": "President",
+			"startDate": "2022-01",
+			"endDate": "2023-01",
+			"summary": "Led the student organization, managed teams, and represented the org externally."
+		}
+	],
+	"projects": [
+		{
+			"name": "Cyoops",
+			"url": "cyoops.com",
+			"date": "2026",
+			"summary": "An AI-powered security testing platform that automates penetration testing workflows. Instead of manually running security scans, users can let AI agents handle the reconnaissance and vulnerability discovery.",
+			"highlights": [
+				"Used Strands Agents to build AI-driven security analysis that thinks like a pentester.",
+				"Implemented browser automation with Playwright for testing web application vulnerabilities.",
+				"Built with SvelteKit for a fast, reactive frontend and FastAPI for the security engine backend."
+			],
+			"stack": "SvelteKit, FastAPI, Strands Agents, Playwright, PostgreSQL, AWS"
+		},
+		{
+			"name": "LLMAO",
+			"url": "github.com/svviitzerland/LLMAO",
+			"date": "2025",
+			"summary": "An open-source, high-performance LLM orchestrator built in Rust. Designed to solve rate-limiting issues by automatically rotating API keys across multiple providers.",
+			"highlights": [
+				"Engineered a high-performance core in Rust, achieving 100x faster cold starts compared to existing Python solutions.",
+				"Implemented intelligent round-robin key rotation to ensure high availability and continuous operation.",
+				"Exposed Python bindings via PyO3, making it seamless to integrate into existing Python workflows."
+			],
+			"stack": "Rust, Python, PyO3"
+		},
+		{
+			"name": "Vessail",
+			"url": "vessail.app",
+			"date": "2025",
+			"summary": "A no-code AI app builder that lets anyone create AI-powered applications without writing code. The goal was to make AI accessible to people who have ideas but not the technical skills to build them.",
+			"highlights": [
+				"Integrated LangChain for AI agent capabilities, allowing users to build conversational and automated workflows.",
+				"Designed the UI to be as simple as possible, hiding the complexity of AI behind intuitive drag-and-drop interfaces.",
+				"Built the backend with FastAPI to handle AI processing and user project management."
+			],
+			"stack": "Next.js, FastAPI, LangChain, Supabase, AWS"
+		},
+		{
+			"name": "Kutautin",
+			"url": "kutaut.in",
+			"date": "2025",
+			"summary": "Built a platform to simplify sharing bank account information in Indonesia. Users create a profile (e.g., kutaut.in/@username) to share payment details easily instead of sending separate messages.",
+			"highlights": [
+				"Identified pain point in Indonesian payment culture and built solution from scratch.",
+				"Developed full stack application with user authentication and profile management.",
+				"Designed clean, mobile-first UI for easy sharing and access."
+			],
+			"stack": "Next.js, Supabase"
+		},
+		{
+			"name": "CloudDatzen",
+			"url": "datzen.cloud",
+			"date": "2024",
+			"endDate": "2026",
+			"summary": "A deployment platform that makes it easy for developers to ship their apps to the cloud. Built the entire platform myself, from the dashboard interface to the deployment engine running on AWS.",
+			"highlights": [
+				"Designed and built the frontend with Next.js, focusing on a clean developer experience.",
+				"Created the backend API with FastAPI, handling deployments, logs, and resource management.",
+				"Set up the infrastructure on AWS using Docker containers with automated CI/CD pipelines."
+			],
+			"stack": "Next.js, FastAPI, AWS, Docker, ClickHouse, Kafka"
+		},
+		{
+			"name": "Hydroponic IoT System",
+			"date": "Dec 2022",
+			"summary": "Developed an IoT-enabled hydroponic monitoring system with real-time cloud connectivity.",
+			"highlights": [
+				"Built custom sensor integration with pH, TDS, and ultrasonic sensors.",
+				"Implemented cloud connectivity using Arduino IoT Cloud for remote monitoring."
+			],
+			"stack": "Arduino, ESP32, C/C++, IoT Cloud"
+		},
+		{
+			"name": "Maulid Check-In",
+			"date": "Feb 2023",
+			"endDate": "Mar 2023",
+			"summary": "A QR code check-in system that eliminates manual guest registration. Guests scan a code and their information is stored in the database, saving time and reducing paper waste."
+		}
+	],
+	"achievements": [
+		{
+			"title": "1st Winner - GCC Cyber Security 2025 Taiwan (International)",
+			"date": "Feb 2025",
+			"summary": "1st Place in Team Category for Quantum Security project.",
+			"highlights": [
+				"Developed quantum-secure application using QRNG (Quantum Random Number Generator).",
+				"Built full stack implementation demonstrating practical quantum computing applications."
+			]
+		},
+		{
+			"title": "Best Blue Team - Cyberwarriors Bootcamp 2023 (National)",
+			"date": "May 2023",
+			"summary": "Led winning team in building Mini SOC Lab on AWS.",
+			"highlights": [
+				"Architected security monitoring infrastructure using SIEM, Grafana, and Wazuh.",
+				"Deployed WAF, honeypots, and threat detection systems on AWS."
+			],
+			"stack": "AWS, Grafana, Wazuh, WAF, S3, CloudWatch"
+		},
+		{
+			"title": "4th MoE Cloud Computing - LKS National",
+			"date": "Oct 2022",
+			"highlights": [
+				"Designed Disaster Recovery and high-availability architectures on AWS.",
+				"Built automated CI/CD pipelines for Node.js deployments."
+			],
+			"stack": "AWS (EC2, ECS, RDS, S3, CodePipeline), Node.js"
+		},
+		{
+			"title": "1st Winner Cloud Computing - LKS Prov Aceh",
+			"date": "Oct 2022",
+			"highlights": [
+				"Built full stack application with PHP backend deployed on AWS."
+			]
+		},
+		{
+			"title": "Finalist IT Software For Business - LKS National",
+			"date": "Oct 2021",
+			"highlights": [
+				"Developed cross-platform applications with C#, ASP.NET API, and Android."
+			]
+		},
+		{
+			"title": "1st Winner IT Software For Business - LKS Prov Aceh",
+			"date": "Jul 2021",
+			"highlights": [
+				"Developed a restaurant application using VB and C#."
+			]
+		}
+	],
+	"certifications": [
+		{
+			"name": "CompTIA Linux+",
+			"date": "Jul 2022",
+			"score": "749"
+		}
+	],
+	"socials": [
+		{
+			"network": "LinkedIn",
+			"username": "farhan-aulianda",
+			"url": "https://linkedin.com/in/farhan-aulianda"
+		},
+		{
+			"network": "GitHub",
+			"username": "svviitzerland",
+			"url": "https://github.com/svviitzerland"
+		},
+		{
+			"network": "Blog",
+			"username": "farhanaulianda.my.id",
+			"url": "https://farhanaulianda.my.id"
+		},
+		{
+			"network": "Instagram",
+			"username": "farhanaulianda.py",
+			"url": "https://instagram.com/farhanaulianda.py"
+		},
+		{
+			"network": "Medium",
+			"username": "@svviitzerland",
+			"url": "https://medium.com/@svviitzerland"
+		}
+	]
+}

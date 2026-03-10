@@ -1,0 +1,318 @@
+:root {
+    --primary-color: #6d5e41;
+    /* Gold/Brown for headers */
+    --header-color: #5E4B35;
+    /* Darker brown for names/titles */
+    --accent-color: #8e806a;
+    /* Borders, bullets */
+    --separator-color: #a09581;
+    /* Lines */
+    --text-color: #333;
+    --text-dark: #444;
+    --text-medium: #555;
+    --text-secondary: #666;
+    --bg-color: #fff;
+    --bg-secondary: #f9f8f6;
+    --timeline-line-color: #dcd6c9;
+    --border-color: #6d5e41;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Merriweather', serif;
+    /* Use Serif as primary based on PDF look */
+    color: var(--text-color);
+    line-height: 1.4;
+    background-color: #fff;
+    font-size: 10pt;
+    /* Adjusted for better fit */
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+}
+
+.container {
+    width: 210mm;
+    min-height: 297mm;
+    background-color: #fff;
+    margin: 0 auto;
+    padding: 30px 40px;
+    position: relative;
+    padding-bottom: 50px;
+}
+
+/* Header */
+.header {
+    text-align: left;
+    /* Name aligned left based on Image 1 */
+    margin-bottom: 5px;
+}
+
+.name {
+    font-family: 'Merriweather', serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--header-color);
+    margin-bottom: 5px;
+}
+
+.label {
+    font-family: 'Merriweather', serif;
+    font-style: italic;
+    font-size: 14px;
+    color: var(--text-dark);
+    margin-bottom: 15px;
+}
+
+/* Contact Box */
+.contact-box {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border: 1px solid var(--accent-color);
+    padding: 8px 10px;
+    background-color: var(--bg-secondary);
+    margin-bottom: 25px;
+}
+
+.contact-item {
+    font-family: 'Merriweather', serif;
+    font-size: 10pt;
+    color: var(--primary-color);
+    /* Brown text for contact info */
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.contact-item a {
+    color: inherit;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.contact-item i {
+    font-size: 10px;
+}
+
+/* Sections */
+.section {
+    margin-bottom: 15px;
+}
+
+.section-heading {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.section-heading h2 {
+    font-family: 'Merriweather', serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--header-color);
+    margin-right: 15px;
+    white-space: nowrap;
+}
+
+.section-heading .line {
+    height: 2px;
+    background-color: var(--separator-color);
+    width: 100%;
+    margin-top: 4px;
+}
+
+/* Summary */
+.summary-section p {
+    text-align: justify;
+    line-height: 1.5;
+    font-size: 10pt;
+    color: #333;
+}
+
+/* Timeline/List Style */
+.timeline {
+    position: relative;
+    padding-left: 5px;
+}
+
+.timeline-item {
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 15px;
+    /* Spacing between items */
+    break-inside: avoid;
+    /* Avoid breaking items across pages */
+}
+
+/* The vertical line */
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 9.5px;
+    top: 5px;
+    bottom: 5px;
+    width: 1px;
+    background-color: var(--timeline-line-color);
+}
+
+.timeline-marker {
+    position: absolute;
+    left: 0;
+    top: 5px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: var(--accent-color);
+    /* The dot color */
+    z-index: 1;
+}
+
+.timeline-content {
+    /* Content wrapper */
+}
+
+.timeline-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 2px;
+}
+
+.title-school,
+.title-company {
+    font-size: 11pt;
+    color: #333;
+}
+
+.title-company strong,
+.title-school strong {
+    color: var(--text-dark);
+    font-weight: 700;
+}
+
+
+.date {
+    font-size: 10pt;
+    font-style: italic;
+    color: var(--text-secondary);
+    white-space: nowrap;
+}
+
+.degree {
+    font-size: 10pt;
+    color: var(--text-medium);
+}
+
+.job-summary {
+    font-size: 10pt;
+    margin-top: 2px;
+    margin-bottom: 4px;
+    color: #333;
+}
+
+.responsibilities-label {
+    font-size: 10pt;
+    margin-bottom: 2px;
+    color: var(--text-dark);
+}
+
+.highlights-list {
+    list-style-type: disc;
+    margin-left: 20px;
+    font-size: 10pt;
+    color: #333;
+}
+
+.highlights-list li {
+    margin-bottom: 2px;
+}
+
+/* Skills Grid */
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    /* 4 columns for skills list */
+    gap: 5px;
+    padding-left: 10px;
+}
+
+.skill-item {
+    font-size: 10pt;
+    color: var(--text-dark);
+}
+
+.bullet {
+    color: var(--text-dark);
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+/* Stack */
+.stack-list {
+    margin-top: 5px;
+    font-size: 10pt;
+    font-style: italic;
+}
+
+/* Print */
+@media print {
+    .container {
+        width: 100%;
+        margin: 0;
+        box-shadow: none;
+        padding: 0 30px;
+    }
+}
+
+/* Socials Custom Classes */
+.social-grid {
+    grid-template-columns: 1fr 1fr;
+}
+
+.social-label {
+    width: 80px;
+    display: inline-block;
+    font-weight: bold;
+}
+
+.social-link {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* Project URL styling */
+.project-url {
+    font-size: 9pt;
+    font-weight: 400;
+    color: var(--text-secondary);
+    font-style: italic;
+}
+
+/* Social Links styling */
+.social-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    padding-left: 10px;
+}
+
+.social-item {
+    font-size: 10pt;
+    display: flex;
+    gap: 8px;
+}
+
+.social-label {
+    font-weight: 600;
+    color: var(--text-dark);
+    min-width: 70px;
+}
+
+.social-url {
+    color: var(--text-medium);
+}

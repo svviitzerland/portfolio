@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{basics.name}} - CV</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&family=Open+Sans:wght@400;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- CSS_INJECT -->
+</head>
+
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1 class="name">{{basics.name}}</h1>
+            <p class="label">{{basics.label}}</p>
+        </header>
+
+        <!-- Contact Box -->
+        <div class="contact-box">
+            <div class="contact-item">
+                <i class="fas fa-envelope"></i>
+                <a href="mailto:{{basics.email}}">{{basics.email}}</a>
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-phone"></i>
+                <span>{{basics.phone}}</span>
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-globe"></i>
+                <a href="https://{{basics.website}}">{{basics.website}}</a>
+            </div>
+        </div>
+
+        <!-- Summary -->
+        <section class="section summary-section">
+            <p>{{basics.summary}}</p>
+        </section>
+
+        <!-- Skills -->
+        <section class="section skills-section">
+            <div class="section-heading">
+                <h2>Skills</h2>
+                <div class="line"></div>
+            </div>
+            <div class="skills-grid">
+                {{#each skills}}
+                <div class="skill-item">
+                    <span class="bullet">•</span> {{this}}
+                </div>
+                {{/each}}
+            </div>
+        </section>
+
+        <!-- Achievements -->
+        <section class="section">
+            <div class="section-heading">
+                <h2>Achievements</h2>
+                <div class="line"></div>
+            </div>
+            <div class="timeline">
+                {{#each achievements}}
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-header">
+                            <div class="title-company"><strong>{{title}}</strong></div>
+                            <div class="date">{{date}}</div>
+                        </div>
+                        {{#if summary}}<div class="job-summary">{{summary}}</div>{{/if}}
+                        {{#if highlights}}
+                        <ul class="highlights-list">
+                            {{#each highlights}}
+                            <li>{{this}}</li>
+                            {{/each}}
+                        </ul>
+                        {{/if}}
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+        </section>
+
+        <!-- Job Experience -->
+        <section class="section experience-section">
+            <div class="section-heading">
+                <h2>Job Experience</h2>
+                <div class="line"></div>
+            </div>
+            <div class="timeline">
+                {{#each work}}
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-header">
+                            <div class="title-company">
+                                <strong>{{position}}, {{company}}</strong>
+                            </div>
+                            <div class="date">{{startDate}} - {{endDate}}</div>
+                        </div>
+
+                        {{#if summary}}<div class="job-summary">{{summary}}</div>{{/if}}
+
+                        {{#if highlights}}
+                        <div class="responsibilities-label">Responsibilities:</div>
+                        <ul class="highlights-list">
+                            {{#each highlights}}
+                            <li>{{this}}</li>
+                            {{/each}}
+                        </ul>
+                        {{/if}}
+                        {{#if stack}}
+                        <div class="stack-list">
+                            <strong>Stack:</strong>
+                            <div class="stack-text">{{stack}}</div>
+                        </div>
+                        {{/if}}
+                    </div>
+                </div>
+                <!-- Add gap except for last item can be done via CSS -->
+                {{/each}}
+            </div>
+        </section>
+
+        <!-- Projects -->
+        <section class="section">
+            <div class="section-heading">
+                <h2>Projects</h2>
+                <div class="line"></div>
+            </div>
+            <div class="timeline">
+                {{#each projects}}
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-header">
+                            <div class="title-company">
+                                <strong>{{name}}</strong>{{#if url}} <span class="project-url">({{url}})</span>{{/if}}
+                            </div>
+                            <div class="date">{{date}} {{#if endDate}}- {{endDate}}{{/if}}</div>
+                        </div>
+                        {{#if summary}}<div class="job-summary">{{summary}}</div>{{/if}}
+                        {{#if highlights}}
+                        <div class="responsibilities-label">Responsibilities:</div>
+                        <ul class="highlights-list">
+                            {{#each highlights}}
+                            <li>{{this}}</li>
+                            {{/each}}
+                        </ul>
+                        {{/if}}
+                        {{#if stack}}
+                        <div class="stack-list">
+                            <strong>Stack:</strong>
+                            <div class="stack-text">{{stack}}</div>
+                        </div>
+                        {{/if}}
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+        </section>
+
+        <!-- Education -->
+        <section class="section education-section">
+            <div class="section-heading">
+                <h2>Education</h2>
+                <div class="line"></div>
+            </div>
+            <div class="timeline">
+                {{#each education}}
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-header">
+                            <div class="title-school">
+                                <span class="school"><strong>{{institution}}</strong></span>
+                            </div>
+                            <div class="date">{{startDate}} - {{endDate}}</div>
+                        </div>
+                        <div class="degree">( {{studyType}} ) {{area}}</div>
+                    </div>
+                </div>
+                {{#each ../education}}
+                <!-- Hack to not close timeline prematurely if needed, but standard loop is fine -->
+                {{/each}}
+                {{/each}}
+            </div>
+        </section>
+
+        <!-- Organization -->
+        {{#if experiences_in_organization}}
+        <section class="section">
+            <div class="section-heading">
+                <h2>Experiences In Organization</h2>
+                <div class="line"></div>
+            </div>
+            <div class="timeline">
+                {{#each experiences_in_organization}}
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-header">
+                            <div class="title-company">
+                                <strong>{{position}} of {{organization}}</strong>
+                            </div>
+                            <div class="date">{{startDate}} - {{endDate}}</div>
+                        </div>
+                        {{#if summary}}<p class="job-summary">{{summary}}</p>{{/if}}
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+        </section>
+        {{/if}}
+
+        <!-- Talks -->
+        {{#if talks}}
+        <section class="section">
+            <div class="section-heading">
+                <h2>Talks & Presentations</h2>
+                <div class="line"></div>
+            </div>
+            <div class="timeline">
+                {{#each talks}}
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-header">
+                            <div class="title-company"><strong>{{title}}</strong></div>
+                            <div class="date">{{date}}</div>
+                        </div>
+                        <div class="job-summary">{{event}}</div>
+                        {{#if summary}}<p class="job-summary">{{summary}}</p>{{/if}}
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+        </section>
+        {{/if}}
+
+        <!-- Certifications -->
+        <section class="section">
+            <div class="section-heading">
+                <h2>Certifications</h2>
+                <div class="line"></div>
+            </div>
+            <div class="timeline">
+                {{#each certifications}}
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-header">
+                            <div class="title-company"><strong>{{name}}</strong></div>
+                            <div class="date">{{date}}</div>
+                        </div>
+                        {{#if score}}<div class="job-summary">Score: {{score}}</div>{{/if}}
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+        </section>
+
+        <!-- Socials -->
+        <section class="section">
+            <div class="section-heading">
+                <h2>Social Links</h2>
+                <div class="line"></div>
+            </div>
+            <div class="social-list">
+                {{#each socials}}
+                <div class="social-item">
+                    <span class="social-label">{{network}}:</span>
+                    <span class="social-url">{{url}}</span>
+                </div>
+                {{/each}}
+            </div>
+        </section>
+
+    </div>
+</body>
+
+</html>
