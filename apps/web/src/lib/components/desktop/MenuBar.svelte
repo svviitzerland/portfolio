@@ -59,9 +59,12 @@
 
 			<!-- Brightness slider dropdown -->
 			{#if showBrightnessSlider}
+				<!-- svelte-ignore a11y_click_events_have_key_events a11y_no_static_element_interactions -->
 				<div
 					class="absolute top-8 right-0 w-48 p-3 bg-zinc-800/90 backdrop-blur-2xl border border-white/10 rounded-xl shadow-2xl"
+					role="presentation"
 					onclick={(e) => e.stopPropagation()}
+					onkeydown={(e) => e.stopPropagation()}
 				>
 					<div class="flex items-center gap-2">
 						<svg class="w-3 h-3 text-zinc-500 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">

@@ -57,6 +57,7 @@
 			const finalY = snapToGrid(y + dragOffsetY);
 			onmove?.(finalX, finalY);
 		} else {
+			e.stopPropagation();
 			onclick?.();
 		}
 

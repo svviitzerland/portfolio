@@ -61,7 +61,7 @@
 						class="flex items-center justify-center w-12 h-12 rounded-xl bg-zinc-700/60 text-zinc-300 hover:text-white hover:bg-zinc-600/60 hover:scale-110 transition-all duration-200 cursor-pointer"
 						onmouseenter={() => (tooltipIndex = i)}
 						onmouseleave={() => (tooltipIndex = -1)}
-						onclick={() => onopen('blog')}
+						onclick={(e) => { e.stopPropagation(); onopen('blog'); }}
 						aria-label="Open Blog"
 					>
 						<svg class="w-6 h-6" viewBox={iconMap['Blog'].viewBox} fill="currentColor">
@@ -107,7 +107,7 @@
 				class="flex items-center justify-center w-12 h-12 rounded-xl bg-zinc-700/60 text-[#1DB954] hover:text-[#1ed760] hover:bg-zinc-600/60 hover:scale-110 transition-all duration-200 cursor-pointer"
 				onmouseenter={() => (tooltipIndex = socials.length)}
 				onmouseleave={() => (tooltipIndex = -1)}
-				onclick={() => onopen('spotify')}
+				onclick={(e) => { e.stopPropagation(); onopen('spotify'); }}
 				aria-label="Open Spotify"
 			>
 				<svg class="w-6 h-6" viewBox={iconMap['Spotify'].viewBox} fill="currentColor">
