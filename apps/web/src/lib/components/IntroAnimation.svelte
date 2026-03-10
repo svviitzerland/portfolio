@@ -10,11 +10,8 @@
 	let deviceType = $state('windows'); // windows, mac, ios, android, linux
 	let sshCopied = $state(false);
 
-	// Multiple terminal states
-	let term1Lines = $state([]);
-	let term2Lines = $state([]);
-	let term3Lines = $state([]);
-	let mainTermLines = $state([]);
+	// Boot log state for Phase 2
+	let repairLines = $state([]);
 
 	// Device-specific error messages
 	const errorMessages = {
@@ -107,89 +104,19 @@
 		}
 	};
 
-	const term1Content = [
-		'$ npm run build',
-		'> portfolio@1.0.0 build',
-		'> vite build',
-		'',
-		'vite v6.0.0 building for production...',
-		'transforming...',
-		'[████████████████████] 100%',
-		'✓ 247 modules transformed.',
-		'rendering chunks...',
-		'dist/index.html                 2.4 kB',
-		'dist/assets/index-a3b2c1d4.js  142.8 kB',
-		'✓ built in 3.42s'
-	];
-
-	const term2Content = [
-		'$ docker-compose up -d',
-		'Creating network "portfolio_default"',
-		'Pulling postgres (postgres:15)...',
-		'15: Pulling from library/postgres',
-		'[████████████████████] Downloaded',
-		'Creating portfolio_db_1 ... done',
-		'Creating portfolio_api_1 ... done',
-		'Creating portfolio_web_1 ... done',
-		'',
-		'$ docker ps',
-		'CONTAINER         STATUS',
-		'portfolio_web_1   Up 2s (healthy)',
-		'portfolio_api_1   Up 3s (healthy)',
-		'portfolio_db_1    Up 4s (healthy)'
-	];
-
-	const term3Content = [
-		'$ aws cloudformation deploy',
-		'--stack-name portfolio-stack',
-		'--template-file template.yml',
-		'',
-		'Waiting for changeset...',
-		'[████████████████████] 100%',
-		'',
-		'Stack Status: CREATE_COMPLETE',
-		'',
-		'Outputs:',
-		'CloudFrontURL: d1a2b3c4.cloudfront.net',
-		'S3Bucket: portfolio-assets-prod',
-		'',
-		'$ aws s3 sync ./dist s3://portfolio',
-		'upload: dist/index.html',
-		'upload: dist/assets/*',
-		'✓ Deployment successful'
-	];
-
-	const mainTermContent = [
-		'// fix.js - System Recovery Script',
-		'',
-		'import { restoreSystem } from "./core/recovery";',
-		'import { rebuildUI } from "./ui/builder";',
-		'import { deployToCloud } from "./deploy/aws";',
-		'',
-		'const developer = {',
-		'  name: "Farhan Aulianda",',
-		'  role: "Full Stack Engineer",',
-		'  stack: {',
-		'    cloud: ["AWS", "Cloudflare"],',
-		'    frontend: ["Svelte", "React", "TailwindCSS"],',
-		'    backend: ["Python", "Node.js", "FastAPI"],',
-		'    database: ["PostgreSQL", "Redis"],',
-		'    devops: ["Docker", "GitHub Actions"]',
-		'  }',
-		'};',
-		'',
-		'async function executeRecovery() {',
-		'  console.log("Initializing recovery...");',
-		'  ',
-		'  await restoreSystem();',
-		'  await rebuildUI();',
-		'  await deployToCloud();',
-		'  ',
-		'  console.log("✓ System restored successfully!");',
-		'  console.log("✓ Portfolio is now live!");',
-		'}',
-		'',
-		'executeRecovery();'
+	const repairBootLines = [
+		{ text: '[    0.000000] Initiating system recovery...', type: 'dim' },
+		{ text: '[    0.000100] Loading portfolio kernel modules...', type: 'dim' },
+		{ text: '[    0.001204] CPU: Intel Core i9-13900K @ 5.80GHz', type: 'dim' },
+		{ text: '[    0.002100] Restoring filesystem...', type: 'dim' },
+		{ text: '[    0.003000] Loading Svelte runtime...             [  OK  ]', type: 'ok' },
+		{ text: '[    0.003500] Loading TailwindCSS...                [  OK  ]', type: 'ok' },
+		{ text: '[    0.004000] Connecting PostgreSQL...               [  OK  ]', type: 'ok' },
+		{ text: '[    0.004500] Starting FastAPI backend...            [  OK  ]', type: 'ok' },
+		{ text: '[    0.005000] Deploying to AWS Cloudflare...         [  OK  ]', type: 'ok' },
+		{ text: '[    0.005500] Mounting Docker containers...          [  OK  ]', type: 'ok' },
+		{ text: '[    0.006000] portfolio.service: Active (running)', type: 'dim' },
+		{ text: '[    0.006500] ✓ System restored successfully.', type: 'success' }
 	];
 
 	function detectDevice() {
@@ -250,59 +177,24 @@
 	});
 
 	function startTerminals() {
-		typeTerminal(term1Content, (lines) => (term1Lines = lines), 70, 0);
-		typeTerminal(term2Content, (lines) => (term2Lines = lines), 80, 300);
-		typeTerminal(term3Content, (lines) => (term3Lines = lines), 75, 600);
-		typeTerminal(mainTermContent, (lines) => (mainTermLines = lines), 50, 200, true);
+		let idx = 0;
+		const interval = setInterval(() => {
+			if (idx < repairBootLines.length) {
+				repairLines = [...repairBootLines.slice(0, idx + 1)];
+				idx++;
+			} else {
+				clearInterval(interval);
+				setTimeout(() => {
+					phase = 3;
+				}, 500);
+			}
+		}, 120);
 	}
 
-	function typeTerminal(content, setter, speed, delay, isMain = false) {
-		setTimeout(() => {
-			let idx = 0;
-			const interval = setInterval(() => {
-				if (idx < content.length) {
-					setter([...content.slice(0, idx + 1)]);
-					idx++;
-				} else {
-					clearInterval(interval);
-					if (isMain) {
-						setTimeout(() => {
-							phase = 3;
-						}, 500);
-					}
-				}
-			}, speed);
-		}, delay);
-	}
-
-	function getCodeClass(line) {
-		if (!line) return '';
-		if (line.startsWith('//') || line.startsWith('#!')) return 'comment';
-		if (line.startsWith('$')) return 'prompt';
-		if (line.startsWith('>')) return 'output';
-		if (line.includes('import') || line.includes('from')) return 'import';
-		if (
-			line.includes('const') ||
-			line.includes('async') ||
-			line.includes('function') ||
-			line.includes('await') ||
-			line.includes('return')
-		)
-			return 'keyword';
-		if (line.includes('"') || line.includes("'")) return 'string';
-		if (line.includes('console.log')) return 'console';
-		if (
-			line.includes('✓') ||
-			line.includes('done') ||
-			line.includes('successful') ||
-			line.includes('Complete') ||
-			line.includes('healthy')
-		)
-			return 'success';
-		if (line.includes('[████')) return 'progress';
-		if (line.includes('Outputs:') || line.includes('STATUS') || line.includes('CONTAINER'))
-			return 'header';
-		return '';
+	function getBootLineClass(type) {
+		if (type === 'ok') return 'boot-ok';
+		if (type === 'success') return 'boot-success';
+		return 'boot-dim';
 	}
 
 	let currentError = $derived(errorMessages[deviceType]);
@@ -392,60 +284,13 @@
 			</div>
 		{/if}
 
-		<!-- Multi-terminal repair -->
+		<!-- Boot Log Repair -->
 		{#if phase === 2}
-			<div class="repair-grid">
-				<div class="side-terms">
-					<div class="mini-term">
-						<div class="term-bar">
-							<span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
-							<span class="term-title">diagnostics</span>
-						</div>
-						<div class="term-body">
-							{#each term1Lines as line, i (i)}
-								<div class={getCodeClass(line)}>{line}</div>
-							{/each}
-						</div>
-					</div>
-					<div class="mini-term">
-						<div class="term-bar">
-							<span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
-							<span class="term-title">docker</span>
-						</div>
-						<div class="term-body">
-							{#each term2Lines as line, i (i)}
-								<div class={getCodeClass(line)}>{line}</div>
-							{/each}
-						</div>
-					</div>
-					<div class="mini-term">
-						<div class="term-bar">
-							<span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
-							<span class="term-title">deploy</span>
-						</div>
-						<div class="term-body">
-							{#each term3Lines as line, i (i)}
-								<div class={getCodeClass(line)}>{line}</div>
-							{/each}
-						</div>
-					</div>
-				</div>
-
-				<div class="main-term">
-					<div class="term-bar main">
-						<span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
-						<span class="term-title">~/portfolio/fix.js</span>
-						<span class="live">● LIVE</span>
-					</div>
-					<div class="term-body main">
-						{#each mainTermLines as line, i (i)}
-							<div class={getCodeClass(line)}>
-								<span class="ln">{i + 1}</span>{line || ' '}
-							</div>
-						{/each}
-						{#if showCursor}<span class="cursor green">_</span>{/if}
-					</div>
-				</div>
+			<div class="boot-log">
+				{#each repairLines as line, i (i)}
+					<div class="boot-line {getBootLineClass(line.type)}">{line.text}</div>
+				{/each}
+				{#if showCursor}<span class="cursor boot-cursor">_</span>{/if}
 			</div>
 		{/if}
 
@@ -743,250 +588,55 @@
 		gap: 4px;
 	}
 
-	/* Repair Grid */
-	.repair-grid {
+	/* Boot Log */
+	.boot-log {
 		position: absolute;
 		inset: 0;
-		display: grid;
-		grid-template-columns: 320px 1fr;
-		gap: 20px;
-		padding: 40px 32px;
-		animation: fade-in 0.5s ease;
-		background: radial-gradient(ellipse at top, #18181b 0%, #09090b 100%);
-	}
-
-	@media (max-width: 1200px) {
-		.repair-grid {
-			grid-template-columns: 280px 1fr;
-			gap: 16px;
-			padding: 32px 20px;
-		}
-	}
-
-	@media (max-width: 900px) {
-		.repair-grid {
-			grid-template-columns: 1fr;
-			grid-template-rows: auto 1fr;
-			gap: 16px;
-			padding: 24px 16px;
-		}
-		.side-terms {
-			flex-direction: row !important;
-			overflow-x: auto;
-			gap: 12px !important;
-			padding-bottom: 8px;
-		}
-		.mini-term {
-			min-width: 240px;
-			flex: 1;
-		}
-	}
-
-	@media (max-width: 600px) {
-		.repair-grid {
-			padding: 16px 12px;
-		}
-		.mini-term {
-			min-width: 200px;
-		}
-	}
-
-	.side-terms {
-		display: flex;
-		flex-direction: column;
-		gap: 16px;
-	}
-
-	.mini-term,
-	.main-term {
-		background: linear-gradient(135deg, #18181b 0%, #0a0a0d 100%);
-		border: 1px solid #27272a;
-		border-radius: 12px;
-		overflow: hidden;
-		box-shadow:
-			0 4px 24px rgba(0, 0, 0, 0.4),
-			0 0 0 1px rgba(39, 39, 42, 0.3) inset;
-		transition: all 0.3s ease;
-	}
-
-	.mini-term:hover,
-	.main-term:hover {
-		border-color: #3f3f46;
-		box-shadow:
-			0 8px 32px rgba(0, 0, 0, 0.5),
-			0 0 0 1px rgba(63, 63, 70, 0.5) inset,
-			0 0 20px rgba(16, 185, 129, 0.1);
-		transform: translateY(-2px);
-	}
-
-	.main-term {
-		display: flex;
-		flex-direction: column;
-	}
-
-	.term-bar {
-		display: flex;
-		align-items: center;
-		gap: 8px;
-		padding: 12px 16px;
-		background: linear-gradient(180deg, #27272a 0%, #18181b 100%);
-		border-bottom: 1px solid #27272a;
-	}
-
-	.term-bar.main {
-		padding: 14px 20px;
-	}
-
-	.dot {
-		width: 11px;
-		height: 11px;
-		border-radius: 50%;
-		box-shadow: 0 0 8px currentColor;
-	}
-
-	.dot.r {
-		background: #ff5f56;
-		color: #ff5f56;
-	}
-	.dot.y {
-		background: #ffbd2e;
-		color: #ffbd2e;
-	}
-	.dot.g {
-		background: #27c93f;
-		color: #27c93f;
-	}
-
-	.term-title {
-		margin-left: 8px;
-		font-size: 12px;
-		color: #71717a;
-		font-family: 'SF Mono', 'Monaco', monospace;
-		font-weight: 500;
-		letter-spacing: 0.02em;
-	}
-
-	.live {
-		margin-left: auto;
-		font-size: 11px;
-		color: #10b981;
-		font-weight: 600;
-		animation: pulse 2s ease infinite;
-		text-shadow: 0 0 8px rgba(16, 185, 129, 0.5);
-	}
-
-	@keyframes pulse {
-		0%,
-		100% {
-			opacity: 1;
-		}
-		50% {
-			opacity: 0.6;
-		}
-	}
-
-	.term-body {
-		padding: 16px;
+		padding: 40px;
 		font-family: 'SF Mono', 'Monaco', 'Consolas', 'Courier New', monospace;
-		font-size: 12px;
-		line-height: 1.7;
-		color: #9ca3af;
-		max-height: 180px;
-		overflow: hidden;
-	}
-
-	.term-body.main {
-		flex: 1;
-		font-size: 14px;
+		font-size: clamp(12px, 1.4vw, 15px);
 		line-height: 1.8;
-		padding: 20px 24px;
-		max-height: none;
-		color: #d1d5db;
-	}
-
-	@media (max-width: 900px) {
-		.term-body {
-			font-size: 11px;
-			padding: 12px;
-			max-height: 160px;
-		}
-		.term-body.main {
-			font-size: 13px;
-			padding: 16px 18px;
-		}
+		overflow: hidden;
+		animation: fade-in 0.5s ease;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
 	}
 
 	@media (max-width: 600px) {
-		.term-body {
-			font-size: 10px;
-			padding: 10px;
-		}
-		.term-body.main {
-			font-size: 12px;
-			padding: 14px 16px;
+		.boot-log {
+			padding: 24px 16px;
+			font-size: 11px;
+			line-height: 1.7;
 		}
 	}
 
-	.term-body div {
-		animation: slide-in 0.15s ease;
+	.boot-line {
+		animation: slide-in 0.1s ease;
+		white-space: pre;
 	}
 
-	.ln {
-		display: inline-block;
-		width: 32px;
-		color: #52525b;
-		text-align: right;
-		margin-right: 20px;
-		user-select: none;
-		font-weight: 500;
-	}
-
-	/* Code highlighting - matching zinc theme with emerald accent */
-	.comment {
+	.boot-dim {
 		color: #71717a;
-		font-style: italic;
 	}
-	.import {
-		color: #a1a1aa;
+
+	.boot-ok {
+		color: #9ca3af;
 	}
-	.keyword {
-		color: #d4d4d8;
-		font-weight: 500;
-	}
-	.string {
-		color: #34d399;
-	}
-	.console {
-		color: #a1a1aa;
-	}
-	.success {
-		color: #10b981;
-		font-weight: 500;
-	}
-	.prompt {
-		color: #e4e4e7;
-		font-weight: 600;
-	}
-	.output {
-		color: #a1a1aa;
-	}
-	.progress {
+
+	.boot-success {
 		color: #10b981;
 		font-weight: 600;
 	}
-	.header {
-		color: #d4d4d8;
-		font-weight: 600;
+
+	.boot-cursor {
+		color: #71717a;
+		margin-left: 0;
 	}
 
 	.cursor {
 		display: inline-block;
 		animation: blink 0.8s step-end infinite;
-	}
-
-	.cursor.green {
-		color: #27c93f;
-		margin-left: 40px;
 	}
 
 	@keyframes blink {
