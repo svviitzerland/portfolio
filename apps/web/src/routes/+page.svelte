@@ -5,6 +5,7 @@
 	import Dock from '$lib/components/desktop/Dock.svelte';
 	import ProjectsContent from '$lib/components/desktop/ProjectsContent.svelte';
 	import BlogContent from '$lib/components/desktop/BlogContent.svelte';
+	import SpotifyContent from '$lib/components/desktop/SpotifyContent.svelte';
 	import ResumeModal from '$lib/components/ResumeModal.svelte';
 	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
@@ -12,7 +13,7 @@
 
 	let { data } = $props();
 
-	/** @type {null | 'projects' | 'blog' | 'dossier'} */
+	/** @type {null | 'projects' | 'blog' | 'dossier' | 'spotify'} */
 	let activeWindow = $state(null);
 	let brightness = $state(100);
 
@@ -23,7 +24,8 @@
 	const defaultPositions = {
 		dossier: { x: 20, y: 60 },
 		projects: { x: 20, y: 160 },
-		blog: { x: 20, y: 260 }
+		blog: { x: 20, y: 260 },
+		spotify: { x: 20, y: 360 }
 	};
 
 	let iconPositions = $state(structuredClone(defaultPositions));
@@ -44,7 +46,7 @@
 	// Auto-open folder from ?open= query param + load saved icon positions
 	onMount(() => {
 		const openParam = $page.url.searchParams.get('open');
-		if (openParam && ['projects', 'blog', 'dossier'].includes(openParam)) {
+		if (openParam && ['projects', 'blog', 'dossier', 'spotify'].includes(openParam)) {
 			activeWindow = openParam;
 			// Clean URL without reloading
 			goto('/', { replaceState: true, noScroll: true });
@@ -142,6 +144,19 @@
 				<path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
 			</svg>
 		</DesktopIcon>
+
+		<!-- Spotify -->
+		<DesktopIcon
+			label="Spotify"
+			onclick={() => openWindow('spotify')}
+			x={iconPositions.spotify.x}
+			y={iconPositions.spotify.y}
+			onmove={(nx, ny) => moveIcon('spotify', nx, ny)}
+		>
+			<svg class="w-7 h-7 text-[#1DB954]" viewBox="0 0 24 24" fill="currentColor">
+				<path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/>
+			</svg>
+		</DesktopIcon>
 	</div>
 
 	<!-- Dock -->
@@ -175,4 +190,12 @@
 
 {#if activeWindow === 'dossier'}
 	<ResumeModal close={closeWindow} />
+{/if}
+
+{#if activeWindow === 'spotify'}
+	<DesktopWindow title="Spotify" close={closeWindow}>
+		{#snippet children(search)}
+			<SpotifyContent {search} />
+		{/snippet}
+	</DesktopWindow>
 {/if}
