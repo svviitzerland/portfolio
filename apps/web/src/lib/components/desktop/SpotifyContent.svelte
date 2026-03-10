@@ -92,18 +92,18 @@
 {:else}
 	<div class="flex flex-col h-full">
 		<!-- Profile Header -->
-		<div class="relative px-8 pt-8 pb-6 bg-gradient-to-b from-[#1DB954]/15 via-[#1DB954]/5 to-transparent">
-			<div class="flex items-center gap-5">
+		<div class="relative px-4 sm:px-8 pt-5 sm:pt-8 pb-4 sm:pb-6 bg-gradient-to-b from-[#1DB954]/15 via-[#1DB954]/5 to-transparent">
+			<div class="flex items-center gap-4 sm:gap-5">
 				<!-- Profile Picture -->
 				{#if SPOTIFY_USER_IMAGE}
 					<img
 						src={SPOTIFY_USER_IMAGE}
 						alt={profile.name}
-						class="w-20 h-20 rounded-full object-cover shadow-xl ring-2 ring-[#1DB954]/30"
+						class="w-16 h-16 sm:w-20 sm:h-20 rounded-full object-cover shadow-xl ring-2 ring-[#1DB954]/30"
 					/>
 				{:else}
-					<div class="w-20 h-20 rounded-full bg-zinc-800 flex items-center justify-center ring-2 ring-[#1DB954]/30 shadow-xl">
-						<svg class="w-10 h-10 text-zinc-600" fill="currentColor" viewBox="0 0 24 24">
+					<div class="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-zinc-800 flex items-center justify-center ring-2 ring-[#1DB954]/30 shadow-xl">
+						<svg class="w-8 h-8 sm:w-10 sm:h-10 text-zinc-600" fill="currentColor" viewBox="0 0 24 24">
 							<path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
 						</svg>
 					</div>
@@ -112,8 +112,8 @@
 				<!-- Profile Info -->
 				<div class="flex-1 min-w-0">
 					<p class="text-xs font-medium text-[#1DB954] uppercase tracking-widest mb-1">Profile</p>
-					<h2 class="text-2xl font-bold text-white truncate">{profile.name || 'Spotify User'}</h2>
-					<div class="flex items-center gap-3 mt-2">
+					<h2 class="text-xl sm:text-2xl font-bold text-white truncate">{profile.name || 'Spotify User'}</h2>
+					<div class="flex flex-wrap items-center gap-2 sm:gap-3 mt-2">
 						<span class="text-xs text-zinc-500">{playlists.length} Public Playlists</span>
 						<a
 							href="https://open.spotify.com/user/{SPOTIFY_USER_ID}"
@@ -132,14 +132,14 @@
 		</div>
 
 		<!-- Main Content: Sidebar + Track list -->
-		<div class="flex flex-1 min-h-0">
+		<div class="flex flex-col sm:flex-row flex-1 min-h-0">
 			<!-- Left Sidebar: Playlists -->
-			<div class="w-56 shrink-0 border-r border-zinc-800/50 flex flex-col">
+			<div class="sm:w-56 shrink-0 border-b sm:border-b-0 sm:border-r border-zinc-800/50 flex flex-col">
 				<div class="px-4 py-3">
 					<h3 class="text-[11px] font-semibold text-zinc-500 uppercase tracking-wider">Playlists</h3>
 				</div>
 
-				<div class="flex-1 overflow-y-auto spotify-scroll">
+				<div class="overflow-y-auto max-h-40 sm:max-h-none sm:flex-1 spotify-scroll">
 					{#each playlists as playlist (playlist.id)}
 						<button
 							class="w-full flex items-center gap-3 px-4 py-2.5 text-left transition-all duration-150 {activePlaylistId === playlist.id
@@ -167,14 +167,14 @@
 			<div class="flex-1 flex flex-col min-w-0">
 				{#if activePlaylist}
 					<!-- Playlist Header -->
-					<div class="flex items-center gap-4 px-6 py-4 border-b border-zinc-800/50">
+					<div class="flex items-center gap-3 sm:gap-4 px-4 sm:px-6 py-3 sm:py-4 border-b border-zinc-800/50">
 						<img
 							src={activePlaylist.coverArt}
 							alt={activePlaylist.name}
-							class="w-16 h-16 rounded-lg object-cover shadow-lg"
+							class="w-12 h-12 sm:w-16 sm:h-16 rounded-lg object-cover shadow-lg"
 						/>
 						<div class="flex-1 min-w-0">
-							<h3 class="text-lg font-bold text-white truncate">{activePlaylist.name}</h3>
+							<h3 class="text-base sm:text-lg font-bold text-white truncate">{activePlaylist.name}</h3>
 							<p class="text-xs text-zinc-500 mt-0.5">
 								{activePlaylist.trackCount} tracks · {getTotalDuration(activePlaylist.tracks)}
 							</p>
@@ -183,7 +183,7 @@
 							href="https://open.spotify.com/playlist/{activePlaylist.id}"
 							target="_blank"
 							rel="noopener noreferrer"
-							class="shrink-0 flex items-center gap-2 px-4 py-2 bg-[#1DB954] hover:bg-[#1ed760] text-black text-sm font-semibold rounded-full transition-all duration-200 hover:scale-105"
+							class="shrink-0 flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-[#1DB954] hover:bg-[#1ed760] text-black text-xs sm:text-sm font-semibold rounded-full transition-all duration-200 hover:scale-105"
 						>
 							<svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
 								<path d="M8 5v14l11-7z"/>
@@ -195,8 +195,8 @@
 					<!-- Track List -->
 					<div class="flex-1 overflow-y-auto spotify-scroll">
 						<!-- Column Headers -->
-						<div class="flex items-center gap-4 px-6 py-2 border-b border-zinc-800/30 text-[11px] font-medium text-zinc-600 uppercase tracking-wider sticky top-0 bg-zinc-900/95 backdrop-blur-sm z-10">
-							<span class="w-8 text-center shrink-0">#</span>
+						<div class="flex items-center gap-3 sm:gap-4 px-4 sm:px-6 py-2 border-b border-zinc-800/30 text-[11px] font-medium text-zinc-600 uppercase tracking-wider sticky top-0 bg-zinc-900/95 backdrop-blur-sm z-10">
+							<span class="w-6 sm:w-8 text-center shrink-0">#</span>
 							<span class="flex-1">Title</span>
 							<span class="w-12 text-right shrink-0">
 								<svg class="w-3.5 h-3.5 inline" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -207,9 +207,9 @@
 						</div>
 
 						{#each filteredTracks() as track, i (track.title + i)}
-							<div class="group flex items-center gap-4 px-6 py-2.5 hover:bg-zinc-800/40 transition-colors">
+							<div class="group flex items-center gap-3 sm:gap-4 px-4 sm:px-6 py-2.5 hover:bg-zinc-800/40 transition-colors">
 								<!-- Track Number -->
-								<span class="w-8 text-center text-sm text-zinc-600 group-hover:text-zinc-400 shrink-0 tabular-nums">
+								<span class="w-6 sm:w-8 text-center text-sm text-zinc-600 group-hover:text-zinc-400 shrink-0 tabular-nums">
 									{i + 1}
 								</span>
 

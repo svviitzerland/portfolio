@@ -501,12 +501,19 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		padding: 40px;
+		padding: 24px;
+	}
+
+	@media (min-width: 600px) {
+		.error-screen {
+			padding: 40px;
+		}
 	}
 
 	.error-content {
 		max-width: 900px;
 		color: white;
+		overflow: hidden;
 	}
 
 	.error-face {
@@ -606,14 +613,15 @@
 	@media (max-width: 600px) {
 		.boot-log {
 			padding: 24px 16px;
-			font-size: 11px;
+			font-size: 10px;
 			line-height: 1.7;
 		}
 	}
 
 	.boot-line {
 		animation: slide-in 0.1s ease;
-		white-space: pre;
+		white-space: pre-wrap;
+		word-break: break-all;
 	}
 
 	.boot-dim {
