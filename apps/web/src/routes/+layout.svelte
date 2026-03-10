@@ -76,6 +76,7 @@
 	class="font-sans antialiased text-zinc-50 selection:bg-zinc-300 selection:text-zinc-900 bg-zinc-950 min-h-screen flex flex-col items-center overflow-x-hidden selection:bg-white/20 transition-opacity duration-500"
 	class:opacity-0={showIntro && !introComplete}
 >
+	{#if $page.url.pathname !== '/'}
 	<nav
 		class="fixed top-6 z-50 px-6 py-3 rounded-full bg-zinc-900/50 backdrop-blur-md border border-white/10 shadow-xl flex items-center gap-6 saturate-150 transition-all hover:bg-zinc-900/70 hover:scale-105 duration-300"
 	>
@@ -100,6 +101,7 @@
 			>Contact</a
 		>
 	</nav>
+	{/if}
 
 	{@render children()}
 </div>

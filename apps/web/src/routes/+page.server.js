@@ -1,3 +1,5 @@
+import { fetchMarkdownPosts } from '$lib/utils/posts';
+
 export async function load({ request, platform }) {
 	// Get geo data from Cloudflare headers
 	let country = null;
@@ -42,12 +44,16 @@ export async function load({ request, platform }) {
 
 	const countryName = country ? countryNames[country] || country : null;
 
+	// Fetch blog posts for the desktop Blog modal
+	const posts = await fetchMarkdownPosts();
+
 	return {
 		geo: {
 			country,
 			countryName,
 			city,
 			region
-		}
+		},
+		posts
 	};
 }
