@@ -1,8 +1,6 @@
-import { fetchMarkdownPosts } from '$lib/utils/posts';
+import { redirect } from '@sveltejs/kit';
 
 export const load = async () => {
-	const posts = await fetchMarkdownPosts();
-	return {
-		posts
-	};
+	// Redirect /blog to homepage with blog folder open
+	throw redirect(307, '/?open=blog');
 };

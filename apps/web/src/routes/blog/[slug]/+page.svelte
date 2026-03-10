@@ -17,7 +17,7 @@
 	<meta property="og:title" content={data.meta.title} />
 </svelte:head>
 
-<article class="relative py-32 px-6 w-full min-h-screen bg-zinc-950">
+<article class="relative pt-16 pb-32 px-6 w-full min-h-screen bg-zinc-950">
 	<div class="max-w-4xl mx-auto relative z-10">
 		<!-- Header -->
 		<header class="mb-16 text-center">
@@ -97,7 +97,7 @@
 			<!-- Back to Blog -->
 			<div class="text-center">
 				<a
-					href={resolve('/blog')}
+					href={resolve('/?open=blog')}
 					class="inline-flex items-center text-sm font-bold text-white uppercase tracking-widest hover:text-zinc-400 transition-colors"
 				>
 					<span class="mr-2">←</span> Back to Blog

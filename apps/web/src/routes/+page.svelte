@@ -6,6 +6,9 @@
 	import ProjectsContent from '$lib/components/desktop/ProjectsContent.svelte';
 	import BlogContent from '$lib/components/desktop/BlogContent.svelte';
 	import ResumeModal from '$lib/components/ResumeModal.svelte';
+	import { page } from '$app/stores';
+	import { onMount } from 'svelte';
+	import { goto } from '$app/navigation';
 
 	let { data } = $props();
 
@@ -14,6 +17,16 @@
 	let brightness = $state(100);
 
 	const posts = $derived(data?.posts || []);
+
+	// Auto-open folder from ?open= query param
+	onMount(() => {
+		const openParam = $page.url.searchParams.get('open');
+		if (openParam && ['projects', 'blog', 'dossier'].includes(openParam)) {
+			activeWindow = openParam;
+			// Clean URL without reloading
+			goto('/', { replaceState: true, noScroll: true });
+		}
+	});
 
 	function openWindow(name) {
 		activeWindow = name;

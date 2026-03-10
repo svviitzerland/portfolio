@@ -76,30 +76,26 @@
 	class="font-sans antialiased text-zinc-50 selection:bg-zinc-300 selection:text-zinc-900 bg-zinc-950 min-h-screen flex flex-col items-center overflow-x-hidden selection:bg-white/20 transition-opacity duration-500"
 	class:opacity-0={showIntro && !introComplete}
 >
-	{#if $page.url.pathname !== '/'}
+	{#if $page.url.pathname.startsWith('/blog/')}
 	<nav
-		class="fixed top-6 z-50 px-6 py-3 rounded-full bg-zinc-900/50 backdrop-blur-md border border-white/10 shadow-xl flex items-center gap-6 saturate-150 transition-all hover:bg-zinc-900/70 hover:scale-105 duration-300"
+		class="fixed top-2 left-2 right-2 z-50 h-7 bg-zinc-800/70 backdrop-blur-2xl border border-white/10 rounded-xl flex items-center justify-between px-4 select-none shadow-lg"
 	>
 		<a
 			href={resolve('/')}
-			class="text-sm font-medium text-zinc-300 hover:text-white transition-colors tracking-wide"
-			>Home</a
+			class="text-[12px] font-medium text-zinc-400 hover:text-white transition-colors flex items-center gap-1.5"
 		>
+			<svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+				<path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+			</svg>
+			Desktop
+		</a>
+		<span class="text-[12px] text-zinc-500">Farhan Aulianda</span>
 		<a
-			href={resolve('/#prologue')}
-			class="text-sm font-medium text-zinc-300 hover:text-white transition-colors tracking-wide"
-			>About</a
+			href={resolve('/?open=blog')}
+			class="text-[12px] font-medium text-zinc-400 hover:text-white transition-colors"
 		>
-		<a
-			href={resolve('/blog')}
-			class="text-sm font-medium text-zinc-300 hover:text-white transition-colors tracking-wide"
-			>Blog</a
-		>
-		<a
-			href={resolve('/#contact')}
-			class="text-sm font-medium text-zinc-300 hover:text-white transition-colors tracking-wide"
-			>Contact</a
-		>
+			All Posts
+		</a>
 	</nav>
 	{/if}
 
