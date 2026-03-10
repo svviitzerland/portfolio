@@ -6,13 +6,24 @@
 
 	let { close } = $props();
 
+	let canClose = $state(false);
+
 	// Prevent body scroll when modal is open
+	// Also add a small delay before backdrop click can close the window,
+	// so the same click that opens the window doesn't immediately close it
 	$effect(() => {
 		document.body.style.overflow = 'hidden';
+		canClose = false;
+		const timer = setTimeout(() => { canClose = true; }, 100);
 		return () => {
 			document.body.style.overflow = '';
+			clearTimeout(timer);
 		};
 	});
+
+	function handleBackdropClick() {
+		if (canClose) close();
+	}
 </script>
 
 <svelte:head>
@@ -28,7 +39,7 @@
 <div
 	class="fixed inset-0 z-[60] bg-black/60 backdrop-blur-sm flex items-center justify-center p-0"
 	transition:fade={{ duration: 200 }}
-	onclick={close}
+	onclick={handleBackdropClick}
 	onkeydown={(e) => e.key === 'Escape' && close()}
 	role="presentation"
 >
