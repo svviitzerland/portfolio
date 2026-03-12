@@ -199,10 +199,12 @@
 
 	let currentError = $derived(errorMessages[deviceType]);
 
-	function copySSH() {
+	function openSSH() {
+		// Open SSH client via protocol URI
+		window.open('ssh://ssh.farhanaulianda.my.id', '_self');
 		navigator.clipboard.writeText('ssh ssh.farhanaulianda.my.id');
 		sshCopied = true;
-		setTimeout(() => (sshCopied = false), 2000);
+		setTimeout(() => (sshCopied = false), 3000);
 	}
 
 	function skipToPortfolio() {
@@ -305,8 +307,8 @@
 						<button class="choice-card" onclick={skipToPortfolio}>
 							<div class="choice-icon">
 								<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-									<rect x="2" y="3" width="20" height="14" rx="2"/>
-									<path d="M8 21h8M12 17v4"/>
+									<rect x="2" y="3" width="20" height="14" rx="2" />
+									<path d="M8 21h8M12 17v4" />
 								</svg>
 							</div>
 							<div class="choice-label">Web</div>
@@ -315,10 +317,10 @@
 
 						<div class="choice-or">or</div>
 
-						<button class="choice-card" onclick={copySSH}>
+						<button class="choice-card" onclick={openSSH}>
 							<div class="choice-icon">
 								<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-									<path d="M4 17l6-6-6-6M12 19h8"/>
+									<path d="M4 17l6-6-6-6M12 19h8" />
 								</svg>
 							</div>
 							<div class="choice-label">SSH</div>
@@ -330,7 +332,7 @@
 						<span class="ssh-prompt">$</span>
 						<span class="ssh-text">ssh ssh.farhanaulianda.my.id</span>
 						{#if sshCopied}
-							<span class="ssh-badge">copied!</span>
+							<span class="ssh-badge">connecting... (copied!)</span>
 						{/if}
 					</div>
 				</div>
