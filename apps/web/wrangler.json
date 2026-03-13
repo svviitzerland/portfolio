@@ -1,5 +1,5 @@
 {
-	"name": "me",
+	"name": "portfolio",
 	"main": ".svelte-kit/cloudflare/_worker.js",
 	"compatibility_date": "2026-01-27",
 	"compatibility_flags": ["nodejs_compat"],
