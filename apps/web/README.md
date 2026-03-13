@@ -1,38 +1,34 @@
-# sv
+# Farhan Aulianda - Web Portfolio
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+This is the frontend component of my interactive portfolio, built to provide a modern, responsive, and visually engaging web experience.
 
-## Creating a project
+## Live Access
 
-If you're seeing this, you've probably already done this step. Congrats!
+- **URL:** [https://farhanaulianda.my.id](https://farhanaulianda.my.id)
 
-```sh
-# create a new project in the current directory
-npx sv create
+## Overview
 
-# create a new project in my-app
-npx sv create my-app
-```
+Developed using Svelte and powered by a modern toolchain. The interface focuses on clean design, fluid animations, and optimal performance to showcase my professional experience and projects.
 
-## Developing
+## Development
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+Install the dependencies using `bun`, then start the development server:
 
 ```sh
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+bun install
+bun run dev --open
 ```
 
-## Building
+## Production Build
 
-To create a production version of your app:
+To create an optimized production build:
 
 ```sh
-npm run build
+bun run build
 ```
 
-You can preview the production build with `npm run preview`.
+You can preview the production build locally with `bun run preview`.
 
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+---
+
+*This application is part of a broader monorepo. Please check the root repository for fully comprehensive documentation.*
