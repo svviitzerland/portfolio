@@ -25,7 +25,7 @@ RUN mkdir -p /app/.ssh && chown appuser:appuser /app/.ssh
 
 USER appuser
 
-COPY --from=builder /app/ssh-portfolio .
+COPY --from=builder /app/apps/ssh/ssh-portfolio .
 
 EXPOSE 2222
 
