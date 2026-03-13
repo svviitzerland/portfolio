@@ -12,7 +12,7 @@ async function generateResume() {
         console.log('Starting resume generation...');
 
         // 1. Read the JSON data
-        const cvPath = path.join(__dirname, '../src/lib/data/cv.json');
+        const cvPath = path.join(__dirname, '../../../../data/cv.json');
         if (!fs.existsSync(cvPath)) {
             throw new Error('cv.json not found at ' + cvPath);
         }

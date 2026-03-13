@@ -1,12 +1,9 @@
 package data
 
 import (
-	_ "embed"
 	"encoding/json"
+	portfoliodata "portfolio/data"
 )
-
-//go:embed cv.json
-var cvJSON []byte
 
 type CV struct {
 	Basics                      Basics         `json:"basics"`
@@ -100,7 +97,7 @@ type Social struct {
 
 func LoadCV() (*CV, error) {
 	var cv CV
-	if err := json.Unmarshal(cvJSON, &cv); err != nil {
+	if err := json.Unmarshal(portfoliodata.CVJSON, &cv); err != nil {
 		return nil, err
 	}
 	return &cv, nil

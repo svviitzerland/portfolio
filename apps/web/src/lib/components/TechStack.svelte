@@ -1,5 +1,5 @@
 <script>
-	import cv from '$lib/data/cv.json';
+	import cv from '$data/cv.json';
 
 	// Tech stack data
 	const technologies = cv.skills;

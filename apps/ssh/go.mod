@@ -8,7 +8,10 @@ require (
 	charm.land/log/v2 v2.0.0
 	charm.land/wish/v2 v2.0.0
 	github.com/charmbracelet/ssh v0.0.0-20250826160808-ebfa259c7309
+	portfolio/data v0.0.0
 )
+
+replace portfolio/data => ../../data
 
 require (
 	github.com/anmitsu/go-shlex v0.0.0-20200514113438-38f4b401e2be // indirect

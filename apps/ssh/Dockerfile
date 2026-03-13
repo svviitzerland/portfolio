@@ -3,11 +3,14 @@ FROM golang:1.26-alpine AS builder
 
 WORKDIR /app
 
+COPY data/ data/
+
+WORKDIR /app/apps/ssh
+
 COPY apps/ssh/go.mod apps/ssh/go.sum ./
 RUN go mod download
 
 COPY apps/ssh/ .
-COPY data/cv.json internal/data/cv.json
 RUN CGO_ENABLED=0 GOOS=linux go build -ldflags="-s -w" -o ssh-portfolio .
 
 # ── Runtime Stage ───────────────────────────────────────────────────

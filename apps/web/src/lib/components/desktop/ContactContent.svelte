@@ -1,5 +1,5 @@
 <script>
-	import cv from '$lib/data/cv.json';
+	import cv from '$data/cv.json';
 	import MagneticButton from '$lib/components/MagneticButton.svelte';
 
 	const { basics, socials } = cv;

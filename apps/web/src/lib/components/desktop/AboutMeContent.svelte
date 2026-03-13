@@ -1,5 +1,5 @@
 <script>
-	import cv from '$lib/data/cv.json';
+	import cv from '$data/cv.json';
 
 	const { basics, skills, education, experiences_in_organization } = cv;
 	const { name, label, summary } = basics;
