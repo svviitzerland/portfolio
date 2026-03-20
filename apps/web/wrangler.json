@@ -3,6 +3,11 @@
 	"main": ".svelte-kit/cloudflare/_worker.js",
 	"compatibility_date": "2026-01-27",
 	"compatibility_flags": ["nodejs_compat"],
+	"vars": {
+		"PUBLIC_SPOTIFY_USER_ID": "z0qks1c6zvnhxtycys8mxg862",
+		"PUBLIC_SPOTIFY_USER_IMAGE": "https://i.scdn.co/image/ab6775700000ee85485738480c43d80c0891f9b9",
+		"PUBLIC_SPOTIFY_PLAYLIST_IDS": "2lghv254ucRjYu5I4Io3Tx,0lY6T7fXAzCUDRLkTZQS38,6QuIFi03af2UDuod9QFKb6"
+	},
 	"assets": {
 		"binding": "ASSETS",
 		"directory": ".svelte-kit/cloudflare"
