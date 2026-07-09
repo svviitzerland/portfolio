@@ -25,7 +25,8 @@
 		dossier: { x: 20, y: 60 },
 		projects: { x: 20, y: 160 },
 		blog: { x: 20, y: 260 },
-		spotify: { x: 20, y: 360 }
+		spotify: { x: 20, y: 360 },
+		nimbus: { x: 20, y: 460 }
 	};
 
 	let iconPositions = $state(structuredClone(defaultPositions));
@@ -155,6 +156,38 @@
 		>
 			<svg class="w-7 h-7 text-[#1DB954]" viewBox="0 0 24 24" fill="currentColor">
 				<path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/>
+			</svg>
+		</DesktopIcon>
+
+		<!-- Nimbus -->
+		<DesktopIcon
+			label="Nimbus"
+			onclick={() => window.open('https://nimbus.farhanaulianda.my.id', '_blank', 'noopener')}
+			x={iconPositions.nimbus.x}
+			y={iconPositions.nimbus.y}
+			onmove={(nx, ny) => moveIcon('nimbus', nx, ny)}
+		>
+			<!-- Nim, maskot Nimbus -->
+			<svg class="w-10 h-10" viewBox="0 0 100 100" fill="none">
+				<!-- cloud body -->
+				<ellipse cx="50" cy="66" rx="33" ry="20" fill="#fff" />
+				<circle cx="33" cy="60" r="15" fill="#fff" />
+				<circle cx="50" cy="50" r="20" fill="#fff" />
+				<circle cx="67" cy="60" r="15" fill="#fff" />
+				<!-- hard hat -->
+				<path d="M35 44a15 13 0 0 1 30 0Z" fill="#dd9e36" />
+				<rect x="31" y="42" width="38" height="5" rx="2.5" fill="#dd9e36" />
+				<rect x="47" y="30" width="6" height="8" rx="3" fill="#c9881f" />
+				<!-- eyes -->
+				<circle cx="43" cy="56" r="2.8" fill="#16212b" />
+				<circle cx="59" cy="56" r="2.8" fill="#16212b" />
+				<circle cx="44" cy="55" r="0.9" fill="#fff" />
+				<circle cx="60" cy="55" r="0.9" fill="#fff" />
+				<!-- cheeks -->
+				<circle cx="36" cy="62" r="3" fill="#ffb3a8" opacity="0.6" />
+				<circle cx="64" cy="62" r="3" fill="#ffb3a8" opacity="0.6" />
+				<!-- mouth -->
+				<path d="M43 62q7 8 14 0" stroke="#16212b" stroke-width="2.4" stroke-linecap="round" fill="none" />
 			</svg>
 		</DesktopIcon>
 	</div>
